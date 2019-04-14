@@ -59,13 +59,16 @@ class HandTracker:
     def track(self, frame):
         contours = self._masking(frame)
 
+        # get main contour
         areas = [cv2.contourArea(c) for c in contours]
         max_area = np.argmax(areas)
         contour = contours[max_area]
 
+        # get centroid coordinates
         cx, cy = self._calculate_centroid(contour)
         tx, ty = contour[contour[:, :, 1].argmin()][0]
 
+        # extrapolate to upper edge of frame
         z = np.polyfit([cx, tx], [cy, ty], 1)
         px = (0 - z[1]) / z[0]
 
