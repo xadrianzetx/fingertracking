@@ -92,4 +92,4 @@ class HandTracker:
             else:
                 cv2.rectangle(frame, (int(ax), ay), (int(bx), by), (0, 255, 0), 1)
 
-        return frame
+        return frame, px
