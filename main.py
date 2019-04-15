@@ -18,7 +18,7 @@ def main():
 
         frame = tracker.draw_sampling_area(frame)
         tracker.histogram(frame)
-        frame = tracker.track(frame)
+        frame, _ = tracker.track(frame)
 
         cv2.imshow('tracker', rescale_frame(frame))
 
