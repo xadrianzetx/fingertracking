@@ -1,7 +1,7 @@
 import cv2
 import redis
 from flask import Flask, Response, render_template
-from handtracking import HandTracker
+from handtracking import HandTracker, Device
 
 
 app = Flask(__name__)
@@ -12,17 +12,23 @@ def track():
     cap = cv2.VideoCapture(0)
     tracker = HandTracker()
 
+    devices = [
+        Device('device_0', r),
+        Device('device_1', r),
+        Device('device_2', r)
+    ]
+
     try:
         while True:
             _, frame = cap.read()
 
             frame = tracker.draw_sampling_area(frame)
             tracker.histogram(frame)
-            _, coord = tracker.track(frame)
+            _, coord = tracker.track(frame, devices)
 
-            yield coord
+            yield 'data: {}\n\n'.format(coord)
 
-    except:
+    except GeneratorExit:
         cv2.destroyAllWindows()
         cap.release()
 
@@ -32,6 +38,7 @@ def event_stream():
     channel.subscribe('devices')
 
     for msg in channel.listen():
+        msg = msg['data'].decode('utf-8') if msg['data'] is not 1 else msg['data']
         yield 'data: {}\n\n'.format(msg)
 
 
@@ -43,6 +50,11 @@ def index():
 @app.route('/stream')
 def stream():
     return Response(event_stream(), mimetype='text/event-stream')
+
+
+@app.route('/video_capture')
+def video_capture():
+    return Response(track(), mimetype='text/event-stream')
 
 
 if __name__ == '__main__':
