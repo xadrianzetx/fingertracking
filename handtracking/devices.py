@@ -46,6 +46,3 @@ class Device:
             self._hover = False
             self._refresh = False
             self._push()
-
-        else:
-            pass

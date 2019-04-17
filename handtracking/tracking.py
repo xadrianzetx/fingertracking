@@ -80,7 +80,7 @@ class HandTracker:
         # draw hit areas
         width, height, _ = frame.shape
 
-        h_ax = [x * width / 20 for x in [5, 10, 15]]
+        h_ax = [x * width // 20 for x in [5, 10, 15]]
         h_ay = np.zeros(4).astype(int)
         h_bx = [x + 50 for x in h_ax]
         h_by = [y + 30 for y in h_ay]
@@ -90,15 +90,14 @@ class HandTracker:
 
         for ax, ay, bx, by in zip(h_ax, h_ay, h_bx, h_by):
             if bx > px > ax:
-                cv2.rectangle(frame, (int(ax), ay), (int(bx), by), (0, 255, 0), -1)
+                cv2.rectangle(frame, (ax, ay), (bx, by), (0, 255, 0), -1)
 
             else:
-                cv2.rectangle(frame, (int(ax), ay), (int(bx), by), (0, 255, 0), 1)
+                cv2.rectangle(frame, (ax, ay), (bx, by), (0, 255, 0), 1)
 
         # update device status
         for device in devices:
             if device.bx > px > device.ax:
-
                 if device.frames > 10:
                     device.toggle()
 
