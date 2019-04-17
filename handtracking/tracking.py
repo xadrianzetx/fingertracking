@@ -20,14 +20,14 @@ class HandTracker:
         return cx, cy
 
     def _masking(self, frame):
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        blur = cv2.GaussianBlur(frame, (5, 5), 0)
+        hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
         dst = cv2.calcBackProject([hsv], [0, 1], self._histogram, [0, 180, 0, 256], 1)
-        blur = cv2.GaussianBlur(dst, (5, 5), 0)
         disc = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (30, 30))
 
-        cv2.filter2D(dst, -1, disc, blur)
+        cv2.filter2D(dst, -1, disc, dst)
 
-        _, thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        _, thresh = cv2.threshold(dst, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         thresh = cv2.merge((thresh, thresh, thresh))
         mask = np.bitwise_and(frame, thresh)
 
