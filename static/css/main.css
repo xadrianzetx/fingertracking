@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:400');
+
+body {
+    font-family: 'Oswald', sans-serif;
+    background: #222428;
+}
+
+#d0 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 300px;
+    top: 400px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    background: #fff;
+    opacity: 0.1;
+}
+
+#d1 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 43%;
+    top: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    background: #fff;
+    opacity: 0.1;
+}
+
+#d2 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    right: 300px;
+    top: 400px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    background: #fff;
+    opacity: 0.1;
+}
+
+#label {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 44%;
+    top: 500px;
+    font-size: 50px;
+    color: #fe6a3a;
+}
+
+/* make only icon grow on hover */
+
+#d0 #d0i {
+    position: relative;
+    color: #000;
+    opacity: 1;
+    left: 25%;
+    top: 25%;
+    font-size:100px;
+    z-index: -1;
+}
+
+#d1 #d1i {
+    position: relative;
+    color: #000;
+    opacity: 1;
+    left: 20%;
+    top: 25%;
+    font-size:100px;
+    z-index: -1;
+}
+
+#d2 #d2i {
+    position: relative;
+    color: #000;
+    opacity: 1;
+    left: 25%;
+    top: 25%;
+    font-size:100px;
+    z-index: -1;
+}

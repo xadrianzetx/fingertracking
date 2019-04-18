@@ -8,10 +8,18 @@
 </head>
 <body>
     <div>
-        <span id="device"></span>
-        <span id="hover"></span>
-        <span id="active"></span>
+        <div id="d0">
+            <i class="fas fa-cubes" id="d0i"></i>
+        </div>
+        <div id="d1">
+            <i class="fas fa-tv" id="d1i"></i>
+        </div>
+        <div id="d2">
+            <i class="fas fa-camera" id="d2i"></i>
+        </div>
+        <span id="label">Hello boi</span>
     </div>
+    <link rel="stylesheet" href='{{ url_for('static', filename='css/main.css') }}'>
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 </html>
