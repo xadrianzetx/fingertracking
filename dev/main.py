@@ -1,6 +1,6 @@
 import cv2
 import redis
-from handtracking import HandTracker, Device
+from fingertracking import FingerTracker, Device
 
 
 def rescale_frame(frame, w=130, h=130):
@@ -13,7 +13,7 @@ def rescale_frame(frame, w=130, h=130):
 def main():
     r = redis.StrictRedis(host='192.168.1.108', port=6379)
     capture = cv2.VideoCapture(0)
-    tracker = HandTracker()
+    tracker = FingerTracker()
 
     devices = [
         Device('device_0', r),

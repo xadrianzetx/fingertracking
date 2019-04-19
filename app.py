@@ -1,7 +1,7 @@
 import cv2
 import redis
 from flask import Flask, Response, render_template
-from handtracking import HandTracker, Device
+from fingertracking import FingerTracker, Device
 
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ r = redis.StrictRedis(host='192.168.1.108', port=6379)
 
 def track():
     cap = cv2.VideoCapture(0)
-    tracker = HandTracker()
+    tracker = FingerTracker()
 
     devices = [
         Device('device_0', r),
