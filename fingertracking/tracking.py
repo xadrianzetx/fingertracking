@@ -82,7 +82,7 @@ class HandTracker:
 
         h_ax = [x * width // 20 for x in [5, 10, 15]]
         h_ay = np.zeros(4).astype(int)
-        h_bx = [x + 50 for x in h_ax]
+        h_bx = [x + 60 for x in h_ax]
         h_by = [y + 30 for y in h_ay]
 
         for device, ax, bx in zip(devices, h_ax, h_bx):
