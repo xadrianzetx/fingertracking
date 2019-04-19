@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 
-class HandTracker:
+class FingerTracker:
 
     def __init__(self):
         self._vertex_ax = None
