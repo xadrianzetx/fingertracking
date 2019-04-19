@@ -5,33 +5,7 @@ body {
     background: #222428;
 }
 
-#d0 {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    left: 300px;
-    top: 400px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;
-    background: #fff;
-    opacity: 0.1;
-}
-
-#d1 {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    left: 43%;
-    top: 100px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;
-    background: #fff;
-    opacity: 0.1;
-}
-
-#d2 {
+#device_0 {
     position: absolute;
     width: 200px;
     height: 200px;
@@ -42,6 +16,35 @@ body {
     border-radius: 100px;
     background: #fff;
     opacity: 0.1;
+    z-index: -1;
+}
+
+#device_1 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 43%;
+    top: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    background: #fff;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+#device_2 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 300px;
+    top: 400px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    background: #fff;
+    opacity: 0.1;
+    z-index: -1;
 }
 
 #label {
@@ -54,34 +57,33 @@ body {
     color: #fe6a3a;
 }
 
-/* make only icon grow on hover */
 
-#d0 #d0i {
+#device_0 #device_0i {
     position: relative;
-    color: #000;
+    color: #222428;
     opacity: 1;
     left: 25%;
     top: 25%;
     font-size:100px;
-    z-index: -1;
+    transition: 0.2s;
 }
 
-#d1 #d1i {
+#device_1 #device_1i {
     position: relative;
-    color: #000;
-    opacity: 1;
-    left: 20%;
-    top: 25%;
-    font-size:100px;
-    z-index: -1;
-}
-
-#d2 #d2i {
-    position: relative;
-    color: #000;
+    color: #222428;
     opacity: 1;
     left: 25%;
     top: 25%;
     font-size:100px;
-    z-index: -1;
+    transition: 0.2s;
+}
+
+#device_2 #device_2i {
+    position: relative;
+    color: #222428;
+    opacity: 1;
+    left: 25%;
+    top: 25%;
+    font-size:100px;
+    transition: 0.2s;
 }
