@@ -13,7 +13,7 @@ Hand detection is done by sampling image from pre defined area and calculating H
 
 ## Server
 
-App runs on Flask based server and has open connection to Redis database running from Docker container on Raspberry Pi Zero. This solution allows to run multiple instances of app controlling multiple devices on variety of endpoints scattered around location within one network. State of every device is kept in db allowing administration and handling endpoint filures. Each endpoint has minimalistic browser based UI.
+App runs on Flask based server and has open connection to Redis database running from Docker container on Raspberry Pi Zero. This solution allows to run multiple instances of app controlling multiple devices on variety of endpoints scattered around location within one network. State of every device is kept in db allowing administration and handling endpoint failures. Each endpoint has minimalistic browser based UI.
 
 ## Run
 
@@ -27,3 +27,8 @@ Requires Redis connection.
 ## TODO
 
 Contenerize app to run on ARMv7 endpoint (Rpi3)
+
+## References
+
+* ![Histograms](https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html)
+* ![Image thresholding](https://en.wikipedia.org/wiki/Thresholding_(image_processing))
