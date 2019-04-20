@@ -1,9 +1,8 @@
 # fingertracking
 
-***under developement***
 
-OpenCV based finger pointing detection used to control devices
+OpenCV based finger pointing detection used to control IoT devices
 
 <p align="center">
-<image src="https://github.com/xadrianzetx/fingertracking/blob/master/assets/ft4.gif"></image>
+<image src="https://github.com/xadrianzetx/fingertracking/blob/master/assets/ft5.gif"></image>
 </p>
