@@ -17,10 +17,10 @@ App runs on Flask based server and has open connection to Redis database running
 
 ## Run
 
-'''
+```
 git clone https://github.com/xadrianzetx/fingertracking.git
 python app.py
-'''
+```
 
 Requires Redis connection.
 
