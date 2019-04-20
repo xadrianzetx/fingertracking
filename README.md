@@ -30,5 +30,5 @@ Contenerize app to run on ARMv7 endpoint (Rpi3)
 
 ## References
 
-* ![Histograms](https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html)
-* ![Image thresholding](https://en.wikipedia.org/wiki/Thresholding_(image_processing))
+* [Histograms](https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html)
+* [Image thresholding](https://en.wikipedia.org/wiki/Thresholding_(image_processing))
