@@ -20,6 +20,7 @@ class FingerTracker:
         return cx, cy
 
     def _masking(self, frame):
+        # get skin color distribution from sample
         blur = cv2.GaussianBlur(frame, (5, 5), 0)
         hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
         dst = cv2.calcBackProject([hsv], [0, 1], self._histogram, [0, 180, 0, 256], 1)
@@ -27,13 +28,15 @@ class FingerTracker:
 
         cv2.filter2D(dst, -1, disc, dst)
 
+        # img thresholding and masking non skin tonned areas
         _, thresh = cv2.threshold(dst, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         thresh = cv2.merge((thresh, thresh, thresh))
         mask = np.bitwise_and(frame, thresh)
 
+        # calculating hand contour coordinates
         gray = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
-        _, new_thresh = cv2.threshold(gray, 0, 255, 0)
-        contour, _ = cv2.findContours(new_thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        _, gray_thresh = cv2.threshold(gray, 0, 255, 0)
+        contour, _ = cv2.findContours(gray_thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
         return contour
 
@@ -51,8 +54,6 @@ class FingerTracker:
         self._vertex_ay = int(7 * height / 20)
         self._vertex_bx = int(self._vertex_ax + 50)
         self._vertex_by = int(self._vertex_ay + 50)
-
-        cv2.rectangle(frame, (self._vertex_ax, self._vertex_ay), (self._vertex_bx, self._vertex_by), (0, 255, 0), 1)
 
         return frame
 
@@ -72,28 +73,13 @@ class FingerTracker:
         z = np.polyfit([cx, tx], [cy, ty], 1)
         px = (0 - z[1]) / z[0]
 
-        cv2.circle(frame, (cx, cy), 10, (0, 255, 0), -1)
-        cv2.circle(frame, (tx, ty), 10, (255, 0, 0), -1)
-        cv2.circle(frame, (int(px), 0), 10, (255, 0, 0), -1)
-        cv2.line(frame, (cx, cy), (tx, ty), (0, 0, 255), thickness=2, lineType=8)
-
         # draw hit areas
         width, height, _ = frame.shape
-
         h_ax = [x * width // 20 for x in [5, 10, 15]]
-        h_ay = np.zeros(4).astype(int)
         h_bx = [x + 60 for x in h_ax]
-        h_by = [y + 30 for y in h_ay]
 
         for device, ax, bx in zip(devices, h_ax, h_bx):
             device.set_hit_area(ax, bx)
-
-        for ax, ay, bx, by in zip(h_ax, h_ay, h_bx, h_by):
-            if bx > px > ax:
-                cv2.rectangle(frame, (ax, ay), (bx, by), (0, 255, 0), -1)
-
-            else:
-                cv2.rectangle(frame, (ax, ay), (bx, by), (0, 255, 0), 1)
 
         # update device status
         for device in devices:
