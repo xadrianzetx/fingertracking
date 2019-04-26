@@ -5,13 +5,14 @@ import tensorflow as tf
 
 class HandTracker:
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        self._model = kwargs.get('model', default='ssd_mobilenetv2')
         self._sess, self._graph = self._load_graph()
 
     def _load_graph(self):
         # model src
         # https://github.com/victordibia/handtracking/blob/master/model-checkpoint/ssdlitemobilenetv2/frozen_inference_graph.pb
-        path = 'assets/ssd_mobilenetv2.pb'
+        path = 'assets/{}.pb'.format(self._model)
         abs_path = pkg_resources.resource_filename('fingertracking', path)
         graph = tf.Graph()
 
