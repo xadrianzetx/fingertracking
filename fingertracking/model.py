@@ -1,3 +1,4 @@
+import cv2
 import pkg_resources
 import tensorflow as tf
 
@@ -25,4 +26,11 @@ class HandTracker:
         return tf.Session(graph=graph_def), graph
 
     def track(self, frame):
-        pass
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        image_tensor = self._graph.get_tensor_by_name('image_tensor:0')
+        detection_boxes = self._graph.get_tensor_by_name('detection_boxes:0')
+
+        # TODO reshape before run
+        bbox = self._sess.run([detection_boxes], feed_dict={image_tensor: rgb_frame})
+
+        return bbox
