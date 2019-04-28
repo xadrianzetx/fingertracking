@@ -18,11 +18,11 @@ Hand detection is done by sampling image from pre defined area and calculating H
 <image src="https://github.com/xadrianzetx/fingertracking/blob/master/assets/hand_track.gif"></image>
 </p>
 
-** Under developement **
+*** Under developement ***
 
 Based on Single Shot Detector with MobileNet V2 as feature extractor. [Model checkpoint](https://github.com/victordibia/handtracking/tree/master/model-checkpoint/ssdlitemobilenetv2) was exported to frozen graph using tensorflow 1.11.0
 
-# Server
+## Server
 
 App runs on Flask based server and has open connection to Redis database running from Docker container on Raspberry Pi Zero. This solution allows to run multiple instances of app controlling multiple devices on variety of endpoints scattered around location within one network. State of every device is kept in db allowing administration and handling endpoint failures. Each endpoint has minimalistic browser based UI.
 
