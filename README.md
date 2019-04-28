@@ -14,6 +14,10 @@ Hand detection is done by sampling image from pre defined area and calculating H
 
 ## Gesture recognition
 
+<p align="center">
+<image src="https://github.com/xadrianzetx/fingertracking/blob/master/assets/hand_track.gif"></image>
+</p>
+
 ** Under developement **
 
 Based on Single Shot Detector with MobileNet V2 as feature extractor. [Model checkpoint](https://github.com/victordibia/handtracking/tree/master/model-checkpoint/ssdlitemobilenetv2) was exported to frozen graph using tensorflow 1.11.0
