@@ -17,7 +17,7 @@ def main():
 
     while capture.isOpened():
         _, frame = capture.read()
-        frame = tracker.track(frame)
+        frame, _ = tracker.track(frame)
         cv2.imshow('tracker', rescale_frame(frame))
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
