@@ -17,7 +17,25 @@ def main():
 
     while capture.isOpened():
         _, frame = capture.read()
-        frame, _ = tracker.track(frame)
+        frame, coords = tracker.track(frame)
+
+        h, w, _ = frame.shape
+        a = (0, (w // 2) - 80)
+        b = ((w // 2) + 80, w)
+
+        if len(coords) > 0:
+            coord = coords[0]
+            print(a, coord)
+
+            if a[0] < coord[0] < a[1]:
+                cv2.rectangle(frame, (0, 0), ((w //2), h), (255, 0, 0), -1, 1)
+
+            elif b[0] < coord[0] < b[1]:
+                cv2.rectangle(frame, ((w // 2), 0), (w, h), (0, 0, 255), -1, 1)
+
+            else:
+                cv2.rectangle(frame, (0, 0), (w, h), (255, 0, 0), 2, 1)
+
         cv2.imshow('tracker', rescale_frame(frame))
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
