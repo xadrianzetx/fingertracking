@@ -1,11 +1,59 @@
 import cv2
+import json
 import redis
 from flask import Flask, Response, render_template
-from fingertracking import FingerTracker, Device
+from fingertracking import FingerTracker, HandTracker, Device
 
 
 app = Flask(__name__)
 r = redis.StrictRedis(host='192.168.1.108', port=6379)
+
+
+def select():
+    cap = cv2.VideoCapture(0)
+    tracker = HandTracker()
+
+    fl = 0
+    fr = 0
+    hover = False
+    hitbox = 'hitbox_0'
+
+    try:
+        while True:
+            _, frame = cap.read()
+            _, coords = tracker.track(frame)
+
+            h, w, _ = frame.shape
+            hl = (0, (w // 2) - 80)
+            hr = ((w // 2) + 80, w)
+
+            if len(coords) > 0:
+                x = coords[0][0]
+
+                if hl[0] < x < hl[1]:
+                    fl += 1
+                    hover = True
+                    hitbox = 'hitbox_l'
+
+                elif hr[0] < x < hr[1]:
+                    fr += 1
+                    hover = True
+                    hitbox = 'hitbox_r'
+
+                else:
+                    fl = 0
+                    fr = 0
+                    hover = False
+                    hitbox = 'hitbox_0'
+
+            data = {'fl': fl, 'fr': fr, 'hover': hover, 'hitbox': hitbox}
+            payload = json.dumps(data)
+
+            yield 'data: {}\n\n'.format(payload)
+
+    except GeneratorExit:
+        cv2.destroyAllWindows()
+        cap.release()
 
 
 def track():
@@ -45,6 +93,11 @@ def event_stream():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/selector')
+def selector():
+    return Response(select(), mimetype='text/event-stream')
 
 
 @app.route('/stream')

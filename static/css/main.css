@@ -47,6 +47,23 @@ body {
     z-index: -1;
 }
 
+#hitbox_r {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: #222428;
+    z-index: -1;
+}
+
+#hitbox_l {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 50%;
+    background: #222428;
+    z-index: -1;
+}
+
 #label {
     position: absolute;
     width: 200px;
@@ -86,4 +103,38 @@ body {
     top: 25%;
     font-size:100px;
     transition: 0.2s;
+}
+
+#hitbox_r #hitbox_ri {
+    position: relative;
+    color: #fe6a3a;
+    left: 42%;
+    top: 50%;
+    font-size:100px;
+    transition: 0.2s;
+}
+
+#hitbox_l #hitbox_li {
+    position: relative;
+    color: #fe6a3a;
+    left: 42%;
+    top: 50%;
+    font-size:100px;
+    transition: 0.2s;
+}
+
+#hitbox_ll {
+    position: relative;
+    left: 25%;
+    top: 70%;
+    font-size: 50px;
+    color: #fe6a3a;
+}
+
+#hitbox_rl {
+    position: relative;
+    left: 25%;
+    top: 70%;
+    font-size: 50px;
+    color: #fe6a3a;
 }
