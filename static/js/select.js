@@ -1,4 +1,4 @@
-var dataSource = new EventSource('/stream');
+var dataSource = new EventSource('/device_datastream');
 var videoSource = new EventSource('/video_capture');
 
 dataSource.onmessage = function (event) {

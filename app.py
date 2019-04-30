@@ -10,13 +10,13 @@ r = redis.StrictRedis(host='192.168.1.108', port=6379)
 
 
 def select():
-    cap = cv2.VideoCapture(0)
     tracker = HandTracker()
+    cap = cv2.VideoCapture(0)
 
-    fl = 0
-    fr = 0
+    framecount_l = 0
+    framecount_r = 0
     hover = False
-    hitbox = 'hitbox_0'
+    hitbox = 'hitbox_l'
 
     try:
         while True:
@@ -31,22 +31,22 @@ def select():
                 x = coords[0][0]
 
                 if hl[0] < x < hl[1]:
-                    fl += 1
+                    framecount_l += 1
                     hover = True
                     hitbox = 'hitbox_l'
 
                 elif hr[0] < x < hr[1]:
-                    fr += 1
+                    framecount_r += 1
                     hover = True
                     hitbox = 'hitbox_r'
 
                 else:
-                    fl = 0
-                    fr = 0
+                    framecount_l = 0
+                    framecount_r = 0
                     hover = False
-                    hitbox = 'hitbox_0'
+                    hitbox = 'hitbox_l'
 
-            data = {'fl': fl, 'fr': fr, 'hover': hover, 'hitbox': hitbox}
+            data = {'fl': framecount_l, 'fr': framecount_r, 'hover': hover, 'hitbox': hitbox}
             payload = json.dumps(data)
 
             yield 'data: {}\n\n'.format(payload)
@@ -81,7 +81,7 @@ def track():
         cap.release()
 
 
-def event_stream():
+def device_datastream():
     channel = r.pubsub()
     channel.subscribe('devices')
 
@@ -100,9 +100,19 @@ def selector():
     return Response(select(), mimetype='text/event-stream')
 
 
-@app.route('/stream')
+@app.route('/device_select')
+def device_select():
+    return render_template('device_select.html')
+
+
+@app.route('/device_settings')
+def device_settings():
+    return render_template('device_settings.html')
+
+
+@app.route('/device_datastream')
 def stream():
-    return Response(event_stream(), mimetype='text/event-stream')
+    return Response(device_datastream(), mimetype='text/event-stream')
 
 
 @app.route('/video_capture')
@@ -111,5 +121,6 @@ def video_capture():
 
 
 if __name__ == '__main__':
+    # TODO fix confusing naming ffs
     app.debug = True
     app.run(threaded=True)
