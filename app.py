@@ -2,7 +2,7 @@ import cv2
 import json
 import redis
 from flask import Flask, Response, render_template
-from fingertracking import FingerTracker, HandTracker, Device
+from zerotouch import FingerTracker, HandTracker, Device
 
 
 app = Flask(__name__)
