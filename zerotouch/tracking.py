@@ -109,7 +109,7 @@ class HandTracker:
         # src
         # https://github.com/victordibia/handtracking/blob/master/model-checkpoint/ssdlitemobilenetv2
         path = 'assets/{}/'.format(self._model)
-        abs_path = pkg_resources.resource_filename('fingertracking', path)
+        abs_path = pkg_resources.resource_filename('zerotouch', path)
 
         with tf.Graph().as_default() as graph:
             sess = tf.Session(graph=graph)
