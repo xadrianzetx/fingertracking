@@ -1,6 +1,7 @@
 import cv2
 import redis
-from fingertracking import FingerTracker, HandTracker, Device
+from zerotouch import FingerTracker, HandTracker, Device
+from zerotouch.motion import MotionOrder
 
 
 def rescale_frame(frame, w=130, h=130):
@@ -14,27 +15,25 @@ def main():
     # r = redis.StrictRedis(host='192.168.1.108', port=6379)
     capture = cv2.VideoCapture(0)
     tracker = HandTracker()
+    order = MotionOrder(False)
+    areas_set = False
 
     while capture.isOpened():
         _, frame = capture.read()
+        h, w, _ = frame.shape
+
+        if not areas_set:
+            order.set_capture_area(frame, 4, 20)
+            areas_set = True
+
         frame, coords = tracker.track(frame)
 
-        h, w, _ = frame.shape
-        a = (0, (w // 2) - 80)
-        b = ((w // 2) + 80, w)
-
         if len(coords) > 0:
-            coord = coords[0]
-            print(a, coord)
+            c = coords[0]
+            order.register(frame, c)
 
-            if a[0] < coord[0] < a[1]:
-                cv2.rectangle(frame, (0, 0), ((w //2), h), (255, 0, 0), -1, 1)
-
-            elif b[0] < coord[0] < b[1]:
-                cv2.rectangle(frame, ((w // 2), 0), (w, h), (0, 0, 255), -1, 1)
-
-            else:
-                cv2.rectangle(frame, (0, 0), (w, h), (255, 0, 0), 2, 1)
+        else:
+            order.parse()
 
         cv2.imshow('tracker', rescale_frame(frame))
 
