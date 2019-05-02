@@ -1,4 +1,5 @@
 import cv2
+import json
 import redis
 from zerotouch import FingerTracker, HandTracker, Device
 from zerotouch.motion import MotionOrder
@@ -13,9 +14,18 @@ def rescale_frame(frame, w=130, h=130):
 
 def main():
     # r = redis.StrictRedis(host='192.168.1.108', port=6379)
+    moves = {
+        'volume_up': [0, 1, 3, 2],
+        'volume_down': [0, 2, 3, 1],
+        'swipe_left': [0, 1],
+        'swipe_right': [1, 0],
+        'scroll_up': [2, 0],
+        'scroll_down': [0, 2]
+    }
+
     capture = cv2.VideoCapture(0)
     tracker = HandTracker()
-    order = MotionOrder(False)
+    order = MotionOrder(moves=moves)
     areas_set = False
 
     while capture.isOpened():
@@ -30,12 +40,15 @@ def main():
 
         if len(coords) > 0:
             c = coords[0]
-            order.register(frame, c)
+            active = order.register(frame, c)
+            payload = json.dumps({'active': active, 'move': None})
 
         else:
-            order.parse()
+            move = order.parse()
+            payload = json.dumps({'active': None, 'move': move})
 
         cv2.imshow('tracker', rescale_frame(frame))
+        print(payload)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
