@@ -26,10 +26,10 @@ class CaptureArea:
 
 class MotionOrder:
 
-    def __init__(self, motions):
+    def __init__(self, moves):
         self._areas = []
         self._order = []
-        self._motions = motions
+        self._moves = moves
 
     def set_capture_area(self, frame, n_areas, padding):
         h, w, _ = frame.shape
@@ -55,11 +55,18 @@ class MotionOrder:
             else:
                 area.draw(frame, 2)
 
+        return self._order
+
     def parse(self):
+        k = None
+
         if len(self._order) > 0:
             _, indices = np.unique(self._order, return_index=True)
-            motion = [self._order[idx] for idx in sorted(indices)]
-            print(motion)
+            move = [self._order[idx] for idx in sorted(indices)]
+            self._order.clear()
 
-        self._order.clear()
-        # TODO compare motion to pre-defined gestures and output
+            for key in self._moves.keys():
+                if self._moves[key] == move:
+                    k = key
+
+        return k
