@@ -1,5 +1,5 @@
 var dataSource = new EventSource('/device_datastream');
-var videoSource = new EventSource('/video_capture');
+var videoSource = new EventSource('/finger_tracking');
 
 dataSource.onmessage = function (event) {
      var data = JSON.parse(event.data);
