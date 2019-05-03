@@ -64,6 +64,76 @@ body {
     z-index: -1;
 }
 
+#a_0 {
+    position: absolute;
+    width: 20%;
+    height: 40%;
+    left: 51%;
+    top: 8%;
+    background: #fff;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+#a_1 {
+    position: absolute;
+    width: 20%;
+    height: 40%;
+    left: 29%;
+    top: 8%;
+    background: #fff;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+#a_2 {
+    position: absolute;
+    width: 20%;
+    height: 40%;
+    left: 51%;
+    top: 52%;
+    background: #fff;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+#a_3 {
+    position: absolute;
+    width: 20%;
+    height: 40%;
+    left: 29%;
+    top: 52%;
+    background: #fff;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+#cover {
+    position: absolute;
+    width: 38%;
+    height: 78%;
+    left: 31%;
+    top: 11%;
+    background: #222428;
+}
+
+#cover #cover_i {
+    position: relative;
+    left: 40%;
+    top: 20%;
+    color: #fe6a3a;
+    font-size: 150px;
+    transition: 0.2s;
+}
+
+#cover #cover_l {
+    position: relative;
+    color: #fe6a3a;
+    left: 10%;
+    top: 60%;
+    font-size: 80px;
+}
+
 #label {
     position: absolute;
     width: 200px;

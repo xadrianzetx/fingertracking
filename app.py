@@ -141,7 +141,9 @@ def device_datastream():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # TODO dev override
+    # return render_template('index.html')
+    return render_template('device_settings.html')
 
 
 @app.route('/device_select')
