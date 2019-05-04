@@ -10,16 +10,14 @@
 </head>
 <body>
     <div>
-        <div id="device_2">
-            <i class="fas fa-cubes" id="device_2i"></i>
+        <div id="hitbox_l">
+            <i class="fas fa-hand-pointer" id="hitbox_li"></i>
+            <span id="hitbox_ll">Pointing</span>
         </div>
-        <div id="device_1">
-            <i class="fas fa-desktop" id="device_1i"></i>
+        <div id="hitbox_r">
+            <i class="fas fa-hand-paper" id="hitbox_ri"></i>
+            <span id="hitbox_rl">Tracking</span>
         </div>
-        <div id="device_0">
-            <i class="fas fa-camera" id="device_0i"></i>
-        </div>
-        <span id="label"></span>
     </div>
     <link rel="stylesheet" href='{{ url_for('static', filename='css/main.css') }}'>
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>

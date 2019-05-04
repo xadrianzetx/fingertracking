@@ -1,55 +1,48 @@
-var dataSource = new EventSource('/stream');
-var videoSource = new EventSource('/video_capture');
+var videoSource = new EventSource('/selector');
 
-dataSource.onmessage = function (event) {
-     var data = JSON.parse(event.data);
-     var device = data['device'];
-     document.getElementById('label').textContent = device.replace('_', ' ');
+videoSource.onmessage = function(event) {
+    var data = JSON.parse(event.data);
+    var hitbox = data['hitbox'];
 
-     if (!data['hover'] && !data['active']) {
-          // background
-          document.getElementById(device).style.background = '#fff';
-          document.getElementById(device).style.opacity = 0.1;
+    if (data['hover']) {
+        // background
+        document.getElementById(hitbox).style.background = '#fe6a3a';
+        
+        // icon
+        document.getElementById(hitbox + 'i').style.color = '#222428';
+        document.getElementById(hitbox + 'i').style.fontSize = '140px';
+        document.getElementById(hitbox + 'i').style.left = '40%';
+        document.getElementById(hitbox + 'i').style.top = '40%';
 
-          // icon
-          document.getElementById(device + 'i').style.color = '#222428';
-          document.getElementById(device + 'i').style.fontSize = '100px';
-          document.getElementById(device + 'i').style.left = '25%'
-          document.getElementById(device + 'i').style.top = '25%'
+        // text
+        document.getElementById(hitbox + 'l').style.color = '#222428';
 
-     } else if (data['hover'] && !data['active']) {
-          // background
-          document.getElementById(device).style.background = '#fe6a3a';
-          document.getElementById(device).style.opacity = 1;
+    } else {
+        var hitboxes = ['hitbox_l', 'hitbox_r']
 
-          // icon
-          document.getElementById(device + 'i').style.color = '#222428';
-          document.getElementById(device + 'i').style.fontSize = '120px';
-          document.getElementById(device + 'i').style.left = '20%'
-          document.getElementById(device + 'i').style.top = '20%'
+        for (var i = 0; i < hitboxes.length; i++) {
+            // background
+            document.getElementById(hitboxes[i]).style.background = '#222428';
+        
+            // icon
+            document.getElementById(hitboxes[i] + 'i').style.color = '#fe6a3a';
+            document.getElementById(hitboxes[i] + 'i').style.fontSize = '100px';
+            document.getElementById(hitboxes[i] + 'i').style.left = '42%';
+            document.getElementById(hitboxes[i] + 'i').style.top = '50%';
 
-     } else if (!data['hover'] && data['active']) {
-          // background
-          document.getElementById(device).style.background = '#222428';
-          document.getElementById(device).style.opacity = 1;
+            // text
+            document.getElementById(hitboxes[i] + 'l').style.color = '#fe6a3a';
 
-          // icon
-          document.getElementById(device + 'i').style.color = '#fe6a3a';
-          document.getElementById(device + 'i').style.fontSize = '100px';
-          document.getElementById(device + 'i').style.left = '25%'
-          document.getElementById(device + 'i').style.top = '25%'
+        }
 
-     } else {
-          // background
-          document.getElementById(device).style.background = '#222428';
-          document.getElementById(device).style.opacity = 1;
+    }
 
-          // icon
-          document.getElementById(device + 'i').style.color = '#fe6a3a';
-          document.getElementById(device + 'i').style.fontSize = '120px';
-          document.getElementById(device + 'i').style.left = '20%'
-          document.getElementById(device + 'i').style.top = '20%'
+    if (data['fl'] > 10) {
+        window.location.href = "/device_select";
 
-     }
-     
+    } else if (data['fr'] > 10) {
+        window.location.href = "/device_settings";
+
+    }
+
 };

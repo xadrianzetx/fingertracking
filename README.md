@@ -3,6 +3,15 @@
 
 OpenCV based finger pointing detection and gesture recognition used to control IoT devices
 
+## Gesture recognition
+
+<p align="center">
+<image src="https://github.com/xadrianzetx/fingertracking/blob/master/assets/hand_track.gif"></image>
+</p>
+
+
+Hand tracking and gesture recognition based on Single Shot Detector with MobileNet V2 as feature extractor. This works by calculating center of bounding box with highest proba, and then tracing movement of this point through capture areas. Order in which areas are visited is compared to pre defined list of available moves and information is propagated to browser based UI if match is found. [Model checkpoint](https://github.com/victordibia/handtracking/tree/master/model-checkpoint/ssdlitemobilenetv2) was exported to frozen graph using tensorflow 1.11.0
+
 ## Detecting pointing direction
 
 <p align="center">
@@ -11,16 +20,6 @@ OpenCV based finger pointing detection and gesture recognition used to control I
 
 
 Hand detection is done by sampling image from pre defined area and calculating HSV histogram. This allows to pick up skin tone. Each frame is then thresholded and pixels falling out of calculated distribution are masked. Next step is to create contour of non-masked area, calculate its centroid and outermost point - the fingertip. Line between those two points gives us pointing direction, and its linear function is found in order to extrapolate pointing direction in relation to upper edge of frame, where device hit boxes are located.
-
-## Gesture recognition
-
-<p align="center">
-<image src="https://github.com/xadrianzetx/fingertracking/blob/master/assets/hand_track.gif"></image>
-</p>
-
-*** Under developement ***
-
-Based on Single Shot Detector with MobileNet V2 as feature extractor. [Model checkpoint](https://github.com/victordibia/handtracking/tree/master/model-checkpoint/ssdlitemobilenetv2) was exported to frozen graph using tensorflow 1.11.0
 
 ## Server
 
