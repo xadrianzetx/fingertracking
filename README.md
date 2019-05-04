@@ -1,4 +1,4 @@
-# fingertracking
+# zerotouch
 
 
 OpenCV based finger pointing detection and gesture recognition used to control IoT devices
@@ -6,7 +6,7 @@ OpenCV based finger pointing detection and gesture recognition used to control I
 ## Gesture recognition
 
 <p align="center">
-<image src="https://github.com/xadrianzetx/fingertracking/blob/master/assets/hand_track.gif"></image>
+<image src="https://github.com/xadrianzetx/fingertracking/blob/master/assets/ht2.gif"></image>
 </p>
 
 
