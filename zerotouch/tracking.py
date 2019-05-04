@@ -154,8 +154,4 @@ class HandTracker:
             py = (b[1] + a[1]) // 2
             centers.append((px, py))
 
-            # TODO rm this
-            cv2.rectangle(frame, a, b, (0, 255, 0), 2, 1)
-            cv2.circle(frame, (px, py), 10, (0, 0, 255), -1)
-
         return frame, centers

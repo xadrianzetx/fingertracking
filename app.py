@@ -85,8 +85,7 @@ def track_finger():
 
 
 def track_movement():
-    # don't mind hardcoded moves list
-    # it's just a demo after all
+    # demo moves
     moves = {
         'volume_up': [0, 1, 3, 2],
         'volume_down': [0, 2, 3, 1],
@@ -110,12 +109,11 @@ def track_movement():
                 order.set_capture_area(frame, n_areas=4, padding=20)
                 areas_set = True
 
-            frame, coords = tracker.track(frame)
+            _, coords = tracker.track(frame)
 
             if len(coords) > 0:
                 c = coords[0]
-                # TODO remove drawing
-                active = order.register(frame, c)
+                active = order.register(c)
                 payload = json.dumps({'active': active, 'move': None})
 
             else:
@@ -141,9 +139,7 @@ def device_datastream():
 
 @app.route('/')
 def index():
-    # TODO dev override
-    # return render_template('index.html')
-    return render_template('device_settings.html')
+    return render_template('index.html')
 
 
 @app.route('/device_select')
@@ -177,5 +173,4 @@ def motion_tracking():
 
 
 if __name__ == '__main__':
-    app.debug = True
     app.run(threaded=True)
