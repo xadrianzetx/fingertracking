@@ -110,6 +110,7 @@ body {
 
 #cover {
     position: absolute;
+    text-align: center;
     width: 38%;
     height: 78%;
     left: 31%;
@@ -119,8 +120,7 @@ body {
 
 #cover #cover_i {
     position: relative;
-    left: 40%;
-    top: 20%;
+    top: 30%;
     color: #fe6a3a;
     font-size: 150px;
     transition: 0.2s;
@@ -129,8 +129,7 @@ body {
 #cover #cover_l {
     position: relative;
     color: #fe6a3a;
-    left: 10%;
-    top: 60%;
+    top: 30%;
     font-size: 80px;
 }
 
