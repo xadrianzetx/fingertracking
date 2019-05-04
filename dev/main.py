@@ -55,6 +55,7 @@ def main():
     
     cv2.destroyAllWindows()
     capture.release()
+    tracker.close_tf_session()
 
 
 if __name__ == "__main__":
