@@ -1,7 +1,8 @@
 # zerotouch
 
 
-OpenCV based finger pointing detection and gesture recognition used to control IoT devices
+MobileNet and OpenCV based finger pointing detection and gesture recognition used to control IoT devices
+
 
 ## Gesture recognition
 
